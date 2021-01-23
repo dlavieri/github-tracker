@@ -1,32 +1,23 @@
-import React, { useEffect, useState } from 'react';
-import octokit from '../../api/apiSetup';
+import React, { createRef } from 'react';
+import ListItem from './ListItem';
+import AnimateReorder from '../AnimateReorder/AnimateReorder';
 
-const List = () => {
-    const [ repos, setRepos ] = useState([]);
-    const dummy = ['facebook/react', 'discountry/react', 'streamich/react-use', 'reactioncommerce/reaction']
-    
-    function formatDate(){
-        
-    }
-
-    useEffect(() => {
-        if (!repos || !repos.length) {
-            dummy.forEach(r => {
-                const [ owner, repo ] = r.split('/');
-                octokit.request('GET /repos/{owner}/{repo}', {
-                    owner: owner,
-                    repo: repo
-                }).then(result => {
-                    console.log(result.data)
-                    setRepos(prevRepos => [...prevRepos, result.data])
-                })
-            })
-        }
-    },[])
+const List = ({followedRepos, handleMarkSeen, handleSelectRepo}) => {   
 
     return (
-        <ul>
-            {repos.map(repo => <li key={repo.id}>{repo.full_name}</li>)}
+        <ul className="list">
+            <AnimateReorder>
+            {followedRepos.map(repo => <ListItem 
+                key={repo.repo} 
+                repo={repo.repo} 
+                owner={repo.owner}
+                release={repo.release} 
+                update={repo.update}
+                seen={repo.seen}
+                onMarkSeen={handleMarkSeen}
+                ref={createRef()}
+                handleSelectRepo={() => handleSelectRepo(repo.owner, repo.repo)}/>)}
+            </AnimateReorder>
         </ul>
     )
 }   

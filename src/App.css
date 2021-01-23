@@ -1,38 +1,137 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 .App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  height: 100vh;
+  width: 100vw;
+}
+
+/* SEARCH */
+
+.search-header {
+  position: absolute;
+  width: 100%;
+  height: 50px;
+  top: 0;
+  left: 0;
+  display: flex;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  align-items: center;
+  padding: 0 20px;
 }
 
-.App-link {
-  color: #61dafb;
+.search {
+  flex-grow: 1;
+  min-width: 150px;
+  position: relative;
+}
+.search input {
+  width: 100%;
+  height: 30px;
+  padding: 0 10px;
+}
+.search-header button {
+  height: 30px;
+  padding: 0 10px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.search-result-list {
+  position: absolute;
+  left: -20px;
+  margin: 0 20px;
+  list-style: none;
+  width: 100%;
+  overflow-y: scroll;
+  border: 1px solid #888;
+  z-index: 100;
+}
+
+.search-result {
+  padding: 5px 10px;
+  width: 100%;
+  background-color: white;
+  cursor: pointer;
+  font-size: 0.8rem;
+}
+.search-result:hover {
+  background-color: lightblue;
+}
+
+/* BODY */
+
+.body {
+  margin-top: 50px;
+  display: flex;
+  width: 100%;
+  flex-grow: 1;
+}
+
+/* LIST */
+.list {
+  width: 50%;
+  height: 100%;
+  list-style: none;
+  padding: 10px 10px 0 20px;
+}
+
+/* LIST ITEM */
+
+.list-item {
+  height: 100px;
+  border: 1px solid #888;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  padding: 10px 20px;
+  position: relative;
+  background-color: #c2c2c2;
+  min-width: 230px;
+}
+
+.list-item > div {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.list-item.new {
+  background-color: lightgreen;
+}
+
+.list-item .name {
+  font-weight: bold;
+}
+
+.list-item .release {
+  font-size: 0.9rem;
+}
+
+.list-item .update {
+  font-size: 0.8rem;
+  color: #888;
+}
+
+.list-item .mark-seen {
+  position: absolute;
+  right: 10px;
+  bottom: 5px;
+  padding: 2px;
+  cursor: pointer;
+}
+
+/* MORE INFO */
+
+.more-info {
+  padding: 10px;
+  border: 1px solid #888;
+  margin: 10px 20px 0 0;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  width: 50%;
+  max-height: calc(100vh - 50px);
+  overflow-y: scroll;
 }
